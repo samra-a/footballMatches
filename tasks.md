@@ -73,6 +73,7 @@ SELECT COUNT(*) from matches WHERE division_code = 'N1' AND ftr = 'D' AND season
 
 ```sql
 SELECT code FROM divisions WHERE name = 'Premier League';
+SELECT division_code, fthg + ftag as total FROM matches WHERE division_code = 'E0' ORDER BY total DESC;
 
 
 ```
