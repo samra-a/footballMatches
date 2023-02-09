@@ -7,8 +7,6 @@ Each of the questions/tasks below can be answered using a `SELECT` query. When y
 ```sql
 SELECT * FROM matches WHERE season = 2017;
 
-
-
 ```
 
 2) Find all the matches featuring Barcelona.
@@ -23,7 +21,6 @@ SELECT * FROM matches WHERE 'Barcelona' IN (hometeam, awayteam);
 
 ```sql
 SELECT * FROM divisions WHERE name LIKE '%Scottish%';
-
 
 ```
 
@@ -50,7 +47,6 @@ SELECT DISTINCT hometeam FROM matches WHERE hometeam LIKE '%City%';
 SELECT code FROM divisions WHERE country LIKE 'France';
 SELECT COUNT(DISTINCT hometeam) From matches WHERE division_code = 'F1' OR division_code = 'F2';
 
-
 ```
 
 7) Have Huddersfield played Swansea in any of the recorded matches?
@@ -58,14 +54,12 @@ SELECT COUNT(DISTINCT hometeam) From matches WHERE division_code = 'F1' OR divis
 ```sql
 SELECT * FROM matches WHERE hometeam = 'Huddersfield' AND awayteam = 'Swansea' OR hometeam = 'Swansea' AND awayteam = 'Huddersfield';
 
-
 ```
 
 8) How many draws were there in the `Eredivisie` between 2010 and 2015?
 
 ```sql
 SELECT COUNT(*) from matches WHERE division_code = 'N1' AND ftr = 'D' AND season BETWEEN 2010 AND 2015;
-
 
 ```
 
@@ -75,13 +69,12 @@ SELECT COUNT(*) from matches WHERE division_code = 'N1' AND ftr = 'D' AND season
 SELECT code FROM divisions WHERE name = 'Premier League';
 SELECT division_code, hometeam, awayteam, fthg + ftag as total FROM matches WHERE division_code = 'E0' ORDER BY total DESC;
 
-
 ```
 
 10) In which division and which season were the most goals scored?
 
 ```sql
-<!-- Copy solution here -->
+SELECT division_code, season, SUM(fthg + ftag) AS total FROM matches GROUP BY division_code, season ORDER BY total DESC LIMIT 1;
 
 
 ```
@@ -91,9 +84,3 @@ SELECT division_code, hometeam, awayteam, fthg + ftag as total FROM matches WHER
 - [Filtering results](https://www.w3schools.com/sql/sql_where.asp)
 - [Ordering results](https://www.w3schools.com/sql/sql_orderby.asp)
 - [Grouping results](https://www.w3schools.com/sql/sql_groupby.asp)
-
-SELECT * FROM matches WHERE division_code = 'E0' (SUM (matches.fthg + matches.ftag)) ORDER BY DESC, fthg DESC; 
-
-SELECT division_code, fthg, ftag FROM matches WHERE division_code = 'EO' GROUPBY SUM((matches.fthg + matches.ftag)) DESC;
-
-SELECT division_code, fthg, ftag FROM matches WHERE division_code = 'EO' ORDER BY, ftag DESC, 
